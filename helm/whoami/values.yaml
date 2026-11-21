@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: "1.10.3"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 32Mi
+  limits:
+    cpu: 200m
+    memory: 64Mi

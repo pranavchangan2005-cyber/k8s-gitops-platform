@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: whoami-gitops
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/pranavchangan2005-cyber/k8s-gitops-platform.git
+    targetRevision: main
+    path: helm/whoami
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: whoami-demo
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
