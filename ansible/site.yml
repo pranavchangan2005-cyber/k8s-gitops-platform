@@ -1,0 +1,3 @@
+---
+- import_playbook: playbooks/cluster-health.yml
+- import_playbook: playbooks/application-health.yml

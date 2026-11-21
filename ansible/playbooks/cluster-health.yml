@@ -1,0 +1,23 @@
+---
+- name: Kubernetes Cluster Health Check
+  hosts: local
+  gather_facts: false
+
+  tasks:
+    - name: Check Kubernetes nodes
+      ansible.builtin.command: kubectl get nodes
+      register: node_status
+      changed_when: false
+
+    - name: Display Kubernetes node status
+      ansible.builtin.debug:
+        var: node_status.stdout_lines
+
+    - name: Check Kubernetes namespaces
+      ansible.builtin.command: kubectl get namespaces
+      register: namespace_status
+      changed_when: false
+
+    - name: Display Kubernetes namespaces
+      ansible.builtin.debug:
+        var: namespace_status.stdout_lines

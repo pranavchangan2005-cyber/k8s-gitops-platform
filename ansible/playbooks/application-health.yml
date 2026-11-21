@@ -1,0 +1,32 @@
+---
+- name: GitOps Application Health Check
+  hosts: local
+  gather_facts: false
+
+  tasks:
+    - name: Check ArgoCD applications
+      ansible.builtin.command: kubectl get applications -n argocd
+      register: app_status
+      changed_when: false
+
+    - name: Display ArgoCD application status
+      ansible.builtin.debug:
+        var: app_status.stdout_lines
+
+    - name: Check Whoami pods
+      ansible.builtin.command: kubectl get pods -n whoami-demo
+      register: whoami_status
+      changed_when: false
+
+    - name: Display Whoami pod status
+      ansible.builtin.debug:
+        var: whoami_status.stdout_lines
+
+    - name: Check Horizontal Pod Autoscaler
+      ansible.builtin.command: kubectl get hpa -n whoami-demo
+      register: hpa_status
+      changed_when: false
+
+    - name: Display HPA status
+      ansible.builtin.debug:
+        var: hpa_status.stdout_lines
