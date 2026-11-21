@@ -24,4 +24,4 @@ alertmanager:
   enabled: false
 
 defaultRules:
-  create: false
+  create: true
